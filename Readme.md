@@ -14,7 +14,12 @@ for Url:"/pgoods".
 Both clients are AngularJS clients.
 
 - GoodsPriceJSClient access resources by URL:  "&lt;host>/goods".
+    
+    repository: https://github.com/rigels02/goods-GoodsPriceSpring
+
 - GoodsPriceJSClientPages access resources by URL: "&lt;host>/pgoods" and has pagenation support.
+   
+    repository: https://github.com/rigels02/goods-GoodsPriceJSClientPages
 
 &lt;host> - http://localhost:8080
 
