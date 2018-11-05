@@ -1,13 +1,13 @@
 
 package org.rb.goodsprice.model;
 
-import javax.persistence.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.*;
 
 /**
  *
@@ -19,7 +19,31 @@ public class Good implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
-   public static final int FCOUNT = 5;
+    /**
+     *
+     */
+    public static final int FCOUNT = 5;
+
+    public static Good getFromStream(DataInputStream din) throws IOException {
+        
+        Good good = new Good();
+        //long tt = new Date().getTime();
+        Date d = new Date();
+        d.setTime(din.readLong());
+        good.setCdate(d);
+        good.setName(din.readUTF());
+        good.setShop(din.readUTF());
+        good.setPrice(din.readDouble());
+        good.setDiscount(din.readDouble());
+        return good;
+    }
+    public static void putToStream(DataOutputStream dos, Good good) throws IOException{
+        dos.writeLong(good.getCdate().getTime());
+        dos.writeUTF(good.getName());
+        dos.writeUTF(good.getShop());
+        dos.writeDouble(good.getPrice());
+        dos.writeDouble(good.getDiscount());
+    }
 
    /**
     * IMPORTANT: to make field id to be returned in restful response 
@@ -166,27 +190,6 @@ public class Good implements Serializable {
                
    }
    
-    public static Good getFromStream(DataInputStream din) throws IOException {
-        
-        Good good = new Good();
-        //long tt = new Date().getTime();
-        Date d = new Date();
-        d.setTime(din.readLong());
-        good.setCdate(d);
-        good.setName(din.readUTF());
-        good.setShop(din.readUTF());
-        good.setPrice(din.readDouble());
-        good.setDiscount(din.readDouble());
-        return good;
-    }
-    
-    public static void putToStream(DataOutputStream dos, Good good) throws IOException{
-     dos.writeLong(good.getCdate().getTime());
-     dos.writeUTF(good.getName());
-     dos.writeUTF(good.getShop());
-     dos.writeDouble(good.getPrice());
-     dos.writeDouble(good.getDiscount());
-    }
 
 
 }

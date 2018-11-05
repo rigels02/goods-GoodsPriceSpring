@@ -11,6 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.util.Date;
+import org.rb.goodsprice.model.UpdateTime;
+import org.rb.goodsprice.repositories.IUpdateTimeRepository;
 
 @SpringBootApplication
 public class GoodsPriceSpringApplication {
@@ -21,8 +23,16 @@ public class GoodsPriceSpringApplication {
 	}
 
 	/**/
+
+    /**
+     *
+     * @param crudRepo
+     * @param timeRepo
+     * @return 
+     */
+
 	@Bean
-	public CommandLineRunner demo(IGoodsCrudRepository crudRepo){
+	public CommandLineRunner demo(IGoodsCrudRepository crudRepo, IUpdateTimeRepository timeRepo){
 
 		return args -> {
 			log.info("Init Some Goods data.....");
@@ -32,7 +42,7 @@ public class GoodsPriceSpringApplication {
                         for(int i=4;i<=10;i++){
                          crudRepo.save(new Good(new Date(),"Good_"+i,"Shop_"+i,1.40,0.0));
                         }
-
+                        timeRepo.save(new UpdateTime(new Date()));
 		};
 	}
 	/**/
